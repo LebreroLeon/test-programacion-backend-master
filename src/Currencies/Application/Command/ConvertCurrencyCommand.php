@@ -2,7 +2,9 @@
 
 namespace Hoyvoy\Currencies\Application\Command;
 
-class ConvertCurrencyCommand
+use Illuminate\Console\Command;
+
+class ConvertCurrencyCommand extends Command
 {
     // Define las propiedades y métodos necesarios para el comando de conversión.
 }

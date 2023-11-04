@@ -2,8 +2,17 @@
 
 namespace Hoyvoy\Currencies\Application\Command;
 
+use Illuminate\Console\Command;
+use Hoyvoy\Currencies\Domain\CurrencyUpdater;
 
-class UpdateCurrencyRatesCommand
+class UpdateCurrencyRatesCommand extends Command
 {
-     // Define las propiedades y métodos necesarios para el comando de actualización.
+     protected $signature = 'currency:update-rates';
+
+     protected $description = 'Actualizar las tasas de conversión de divisas';
+ 
+     public function handle(CurrencyUpdater $currencyUpdater)
+     {
+         $currencyUpdater->updateCurrencyRates();
+     }
 }

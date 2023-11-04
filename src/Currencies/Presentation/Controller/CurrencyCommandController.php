@@ -2,10 +2,15 @@
 
 namespace Hoyvoy\Currencies\Presentation\Controller;
 
-use Hoyvoy\Currencies\Application\Command\UpdateCurrencyRatesCommand;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Request;
 use Hoyvoy\Currencies\Application\Command\ConvertCurrencyCommand;
+use Hoyvoy\Currencies\Application\Command\UpdateCurrencyRatesCommand;
 
 class CurrencyCommandController
 {
-    // Implementa las acciones para los comandos relacionados con divisas.
+    public function updateCurrencyRates(Request $request)
+    {
+        Artisan::call('currency:update-rates');
+    }
 }

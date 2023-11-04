@@ -1,8 +1,22 @@
 <?php
 
 namespace Hoyvoy\Currencies\Domain;
+use Hoyvoy\Currencies\Infrastructure\ExternalCurrencyService;
 
 class CurrencyUpdater
 {
-    // Implementa la lógica para actualizar tasas de conversión de divisas y almacenar el historial de cambios.
+    protected $externalCurrencyService;
+
+    public function __construct(ExternalCurrencyService $externalCurrencyService)
+    {
+        $this->externalCurrencyService = $externalCurrencyService;
+    }
+
+    public function updateCurrencyRates()
+    {
+        $currencyRates = $this->externalCurrencyService->getCurrencyRates();
+        // TODO: updatear en la base de datos con las nuevas rates
+        // Currency::update($currencyRates);
+        return response()->json($currencyRates);
+    }
 }

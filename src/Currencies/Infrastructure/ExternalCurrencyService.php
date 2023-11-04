@@ -9,6 +9,8 @@ class ExternalCurrencyService
 {
     public function getCurrencyRates()
     {
+
+        //Acuérdate de quitar la caché xq si esto se va a tirar solo cada hora no queremos caché
         $cacheKey = 'currency_rates';
         $currencyRates = Cache::get($cacheKey);
 
