@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
+use Hoyvoy\Currencies\Infrastructure\JsonCurrencyRepository;
+use Hoyvoy\Currencies\Infrastructure\EloquentCurrencyRepository;
 
 return [
 
@@ -184,6 +186,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'EloquentCurrencyRepository' => EloquentCurrencyRepository::class,
+        'JsonCurrencyRepository' => JsonCurrencyRepository::class,
     ])->toArray(),
 
 ];

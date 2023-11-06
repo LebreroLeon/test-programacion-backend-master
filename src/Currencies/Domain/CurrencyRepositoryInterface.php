@@ -4,5 +4,7 @@ namespace Hoyvoy\Currencies\Domain;
 
 interface CurrencyRepositoryInterface
 {
-    // Define los métodos de repositorio para acceder a las divisas y tasas de conversión.
+    public function findAllCurrencies(): array;
+    public function findCurrencyByCode(string $code): ?Currency;
+    public function updateCurrencyRate(string $code, float $newRate): void;
 }

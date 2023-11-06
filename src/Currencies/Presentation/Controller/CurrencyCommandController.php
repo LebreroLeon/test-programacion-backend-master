@@ -11,6 +11,6 @@ class CurrencyCommandController
 {
     public function updateCurrencyRates(Request $request)
     {
-        Artisan::call('currency:update-rates');
+        // Artisan::call('currency:update-rates');
     }
 }

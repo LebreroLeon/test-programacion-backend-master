@@ -1,22 +1,24 @@
 <?php
 
 namespace Hoyvoy\Currencies\Domain;
+use Hoyvoy\Currencies\Domain\CurrencyRepositoryInterface;
 use Hoyvoy\Currencies\Infrastructure\ExternalCurrencyService;
 
 class CurrencyUpdater
 {
     protected $externalCurrencyService;
+    protected $currencyRepository;
 
-    public function __construct(ExternalCurrencyService $externalCurrencyService)
-    {
+    public function __construct(ExternalCurrencyService $externalCurrencyService, CurrencyRepositoryInterface $currencyRepository) {
         $this->externalCurrencyService = $externalCurrencyService;
+        $this->currencyRepository = $currencyRepository;
     }
 
-    public function updateCurrencyRates()
-    {
+    public function updateCurrencyRates() {
         $currencyRates = $this->externalCurrencyService->getCurrencyRates();
-        // TODO: updatear en la base de datos con las nuevas rates
-        // Currency::update($currencyRates);
-        return response()->json($currencyRates);
+        
+        foreach ($currencyRates as $code => $rate) {
+            $this->currencyRepository->updateCurrencyRate($code, $rate);
+        }
     }
 }
