@@ -2,7 +2,9 @@
 
 namespace Hoyvoy\Currencies\Domain;
 
+use Hoyvoy\Currencies\Infrastructure\ExternalCurrencyRateService;
+
 class CurrencyService
 {
-    // Implementa la lógica de la aplicación relacionada con divisas.
+    //Aquí validaciones, conversiones y uso de currency y currencyrate y eso
 }

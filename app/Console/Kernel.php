@@ -7,13 +7,19 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+
+    protected $commands = [
+        'Hoyvoy\Currencies\Application\Command\UpdateCurrencyRatesCommand',
+        'Hoyvoy\Currencies\Application\Command\UpdateCurrencyNamesCommand'
+    ];
+
     /**
      * Define the application's command schedule.
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('currency:update-rates')->hourly();
-        // $schedule->command('currency:update-rates')->everyMinute();
+        $schedule->command('currencies:update-rates')->hourly();
+        $schedule->command('currencies:update-name')->hourly();
     }
 
     /**
@@ -22,7 +28,6 @@ class Kernel extends ConsoleKernel
     protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');
-
         require base_path('routes/console.php');
     }
 }

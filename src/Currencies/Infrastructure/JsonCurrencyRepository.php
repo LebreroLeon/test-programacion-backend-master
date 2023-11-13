@@ -33,22 +33,66 @@ class JsonCurrencyRepository implements CurrencyRepositoryInterface
     public function updateCurrencyRate(string $code, float $newRate): void
     {
         $jsonData = $this->getJsonData();
-        $currencies = $jsonData['data'];
-
+    
+        if (!isset($jsonData['data'])) {
+            $jsonData['data'] = [];
+        }
+    
+        $currencies = &$jsonData['data'];
+        
         foreach ($currencies as &$currencyData) {
             if ($currencyData['code'] === $code) {
+
                 $currencyData['rate_USD'] = number_format($newRate, 2, '.', '');
-                break;
+                $this->saveJsonData($jsonData);
+                return;
             }
         }
-
+    
+        $newCurrencyData = [
+            'code' => $code,
+            'rate_USD' => number_format($newRate, 2, '.', ''),
+        ];
+    
+        $currencies[] = $newCurrencyData;
+        $this->saveJsonData($jsonData);
+    }
+    
+    public function updateCurrencyName(string $code, string $newName): void
+    {
+        $jsonData = $this->getJsonData();
+    
+        if (!isset($jsonData['data'])) {
+            $jsonData['data'] = [];
+        }
+    
+        $currencies = &$jsonData['data'];
+    
+        foreach ($currencies as &$currencyData) {
+            if ($currencyData['code'] === $code) {
+                $currencyData['name'] = $newName;
+                $this->saveJsonData($jsonData);
+                return;
+            }
+        }
+    
+        $newCurrencyData = [
+            'code' => $code,
+            'name' => $newName,
+        ];
+    
+        $currencies[] = $newCurrencyData;
         $this->saveJsonData($jsonData);
     }
 
     protected function getJsonData(): array
     {
-        $jsonContents = Storage::get($this->jsonPath);
-        return json_decode($jsonContents, true);
+        if (Storage::exists($this->jsonPath)) {
+            $jsonContents = Storage::get($this->jsonPath);
+            return json_decode($jsonContents, true) ?: ['data' => []];
+        }
+    
+        return ['data' => []];
     }
 
     protected function saveJsonData(array $data): void

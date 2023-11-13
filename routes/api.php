@@ -10,5 +10,5 @@ Route::get('/example', ExampleGetController::class);
 
 
 Route::get('/currencies', [CurrencyQueryController::class, 'getAllCurrencies']);
-Route::get('/currencies/rate-conversion', [CurrencyQueryController::class, 'convertCurrency']);
-Route::post('/currencies/update-rates', [CurrencyCommandController::class, 'updateCurrencyRates']);
+// Route::get('/currencies/rate-conversion', [CurrencyQueryController::class, 'convertCurrency']);
+// Route::post('/currencies/update-rates', [CurrencyCommandController::class, 'updateCurrencyRates']);
