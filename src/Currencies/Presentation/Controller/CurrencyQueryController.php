@@ -11,27 +11,17 @@ use Hoyvoy\Currencies\Infrastructure\ExternalCurrencyRateService;
 
 class CurrencyQueryController
 {
-    private $externalCurrencyRateService;
+    private $getCurrenciesQuery;
 
-    public function __construct(ExternalCurrencyRateService $externalCurrencyRateService)
+    public function __construct(GetCurrenciesQuery $getCurrenciesQuery)
     {
-        $this->externalCurrencyRateService = $externalCurrencyRateService;
+        $this->getCurrenciesQuery = $getCurrenciesQuery;
     }
 
-
-    //TODO qutiar el hardcode de la api y leer del json en el GetCurrenciesQuery.php
     public function getAllCurrencies()
     {
-        $currencies = $this->externalCurrencyRateService->getCurrencyRates();
-
-        foreach ($currencies as $key => $value){
-            $formattedCurrencies[] = [
-                'code' => $key,
-                'rate' => $value,
-            ];
-        } 
-
-        return response()->json(['data' => $formattedCurrencies]);
+        $currencies = $this->getCurrenciesQuery->execute();
+        return response()->json(['data' => $currencies]);
     }
 
 }

@@ -2,7 +2,21 @@
 
 namespace Hoyvoy\Currencies\Infrastructure;
 
+use Illuminate\Support\Facades\Mail;
+
 class EmailService
 {
-    // TODO: Se requiere enviar un mail cada vez que se updatean las currencies
+    public function sendCurrencyUpdateMail()
+    {
+        $to = 'cambio@moneda.es';
+        $from = 'lebrero.leon@gmail.com';
+        $subject = 'Actualización de Divisas';
+        $message = 'Se han actualizado las divisa.';
+
+        Mail::raw($message, function ($mail) use ($to, $subject, $from) {
+            $mail->to($to)
+                ->from($from)
+                ->subject($subject);
+        });
+    }
 }
