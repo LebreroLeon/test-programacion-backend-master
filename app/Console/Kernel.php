@@ -19,7 +19,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('currencies:update-rates')->hourly();
-        $schedule->command('currencies:update-name')->hourly();
+        $schedule->command('currencies:update-names')->hourly();
     }
 
     /**

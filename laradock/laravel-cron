@@ -1,0 +1,4 @@
+# laravel-cron
+0 * * * * cd /var/www && php artisan currencies:update-rates >> /var/www/storage/logs/cron.log 2>&1
+0 * * * * cd /var/www && php artisan currencies:update-names >> /var/www/storage/logs/cron.log 2>&1
+

@@ -2,6 +2,7 @@
 
 namespace Hoyvoy\Currencies\Application\Command;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Console\Command;
 use Hoyvoy\Currencies\Domain\CurrencyNameUpdaterService;
 
@@ -14,6 +15,6 @@ class UpdateCurrencyNamesCommand extends Command
     public function handle(CurrencyNameUpdaterService $currencyNameUpdater)
     {
         $currencyNameUpdater->updateCurrencyName();
-        $this->info('¡Currencies Names Updated!');
+        $this->info('Command currencies:update-names executed at ' . Carbon::now());
     }
 }

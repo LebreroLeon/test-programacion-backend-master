@@ -65,11 +65,11 @@ class JsonCurrencyRepository implements CurrencyRepositoryInterface
         if (!isset($jsonData['data'])) {
             $jsonData['data'] = [];
         }
-    
         $currencies = &$jsonData['data'];
     
         foreach ($currencies as &$currencyData) {
             if ($currencyData['code'] === $code) {
+
                 $currencyData['name'] = $newName;
                 $this->saveJsonData($jsonData);
                 return;
@@ -80,7 +80,7 @@ class JsonCurrencyRepository implements CurrencyRepositoryInterface
             'code' => $code,
             'name' => $newName,
         ];
-    
+        
         $currencies[] = $newCurrencyData;
         $this->saveJsonData($jsonData);
     }

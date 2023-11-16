@@ -4,6 +4,8 @@ namespace Hoyvoy\Currencies\Infrastructure;
 
 class CurrencyConversionService
 {
+    //Dado que la api (free) nos obliga a trabajar con rate_EUR
+    //convertimos todos los rates a rate_USD
     public function convertRatesToUSD(array $currencyRates): array
     {
         $usdRate = $currencyRates['USD'];

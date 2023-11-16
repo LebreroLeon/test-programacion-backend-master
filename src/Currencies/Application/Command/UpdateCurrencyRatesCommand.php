@@ -2,6 +2,7 @@
 
 namespace Hoyvoy\Currencies\Application\Command;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Console\Command;
 use Hoyvoy\Currencies\Domain\CurrencyUpdaterService;
 
@@ -14,6 +15,6 @@ class UpdateCurrencyRatesCommand extends Command
      public function handle(CurrencyUpdaterService $currencyUpdater)
      {
          $currencyUpdater->updateCurrencyRates();
-         $this->info('¡Currencies Rates Updated!');
+         $this->info('Command currencies:update-rates executed at ' . Carbon::now());
      }
 }
